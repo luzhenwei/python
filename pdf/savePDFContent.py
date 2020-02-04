@@ -100,7 +100,9 @@ def moveImage2Exl(imagePathStr, pdfInfoStr, num, sheet):
 if __name__ == "__main__":
     filepaths = []  # 初始化列表用来
     pageNum = 2
+    #放提取图片的文件夹
     pic_path = r"G:\pythonTmp1"
+    #放pdf的文件夹
     all_files_path(r'G:\office')
     infoDict = {}
     num = 1
