@@ -92,9 +92,9 @@ def pdf2pic(filepath, pic_path):
 
 
 def moveImage2Exl(imagePathStr, pdfInfoStr, num, sheet):
-    sheet.insert_image('C' + str(num), imagePathStr)
-    sheet.write('B' + str(num), pdfInfoStr)
-    sheet.write('A' + str(num), str(num))
+    sheet.insert_image('C' + str(num + 1), imagePathStr)
+    sheet.write('B' + str(num + 1), pdfInfoStr)
+    sheet.write('A' + str(num + 1), str(num))
 
 
 if __name__ == "__main__":
@@ -113,13 +113,12 @@ if __name__ == "__main__":
     sheet.write('E' + str(num), '标称生产企业所属省份城市')
     for filepath in filepaths:
         # print(filepath)
-        num += 1
         imagePathStr = pdf2pic(filepath, pic_path)
         pdfInfoStr = getPageContent(filepath)
         moveImage2Exl(imagePathStr, pdfInfoStr, num, sheet)
-        str = '>' * (num - 1 // 2) + ' ' * ((len(filepaths) - num - 1) // 2)
-        sys.stdout.write('\r' + str + '[%s%%]' % num)
-        sys.stdout.flush()
-        time.sleep(0.1)
+        num += 1
+        sys.stdout.write('\r======程序运行======[%s' % (round(num / len(filepaths) * 100, 2)) + '%]')
+        if num > 10:
+            break
     book.close()
     print("======执行完毕，请查看文件======")
