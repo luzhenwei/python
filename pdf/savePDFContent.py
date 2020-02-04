@@ -39,9 +39,9 @@ def getPageContent(filepath):
         str = pdf.pages[2].extract_text()
         # print(str)
         startNum = str.find("抽样单编号")
-        endNum = str.find("检查封样人员")
+        # endNum = str.find("检查封样人员")
         # print(startNum)
-        result = str[startNum:endNum].replace("抽样单编号", '').strip()
+        result = str[startNum:startNum+25].replace("抽样单编号", '').strip()
     return result
 
 
@@ -118,7 +118,5 @@ if __name__ == "__main__":
         moveImage2Exl(imagePathStr, pdfInfoStr, num, sheet)
         num += 1
         sys.stdout.write('\r======程序运行======[%s' % (round(num / len(filepaths) * 100, 2)) + '%]')
-        if num > 10:
-            break
     book.close()
     print("======执行完毕，请查看文件======")
